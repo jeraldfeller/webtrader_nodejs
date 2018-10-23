@@ -1,0 +1,5 @@
+{
+  "dbConfig": {
+    "pass": "nanopips_db_password"
+  }
+}

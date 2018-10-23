@@ -1,0 +1,10 @@
+{
+  "name": "Nanopips Production Server",
+  "domain": "webtrader.nanopips.com",
+  "dbConfig": {
+    "host": "dev.webtrader.com",
+    "user": "nanopips_admin",
+    "port": "",
+    "dbName": "stock_brokerage"
+  }
+}

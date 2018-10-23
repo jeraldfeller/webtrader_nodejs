@@ -1,0 +1,10 @@
+{
+  "name": "Nanopips Default Server",
+  "domain": "dev.webtrader.com",
+  "dbConfig": {
+    "host": "dev.webtrader.com",
+    "user": "root",
+    "port": "",
+    "dbName": "stock_brokerage"
+  }
+}
