@@ -33,15 +33,21 @@ class Common{
 
 
   getRandomInt(min = -10, max = 10, isWholeNumber = false) {
-  var precision = 100; // 2 decimals
-  //  return Math.floor(Math.random() * (max - min + 1)) + min;
-  //return Math.floor(Math.random() * (max * precision - min * precision) + 1 * precision) / (1*precision);
-  if(isWholeNumber == true){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }else{
-    return Math.floor(Math.random() * (max * precision - min * precision) + min * precision) / (1*precision);
+    var precision = 100; // 2 decimals
+    //  return Math.floor(Math.random() * (max - min + 1)) + min;
+    //return Math.floor(Math.random() * (max * precision - min * precision) + 1 * precision) / (1*precision);
+    if(isWholeNumber == true){
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }else{
+      return Math.floor(Math.random() * (max * precision - min * precision) + min * precision) / (1*precision);
+    }
   }
-}
+
+
+  toTimestamp(strDate) {
+    var datum = Date.parse(strDate);
+    return datum;
+  }
 
 }
 

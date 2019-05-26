@@ -4,10 +4,10 @@ const fs = require('fs');
 class Mysql {
   constructor(connection) {
     this.connection = mysql.createConnection({
-      host: config.get('dbConfig.host'),
-      user: config.get('dbConfig.user'),
-      password: config.get('dbConfig.password'),
-      database: config.get('dbConfig.dbName')
+      host: 'localhost',
+      user: 'nanopips_admin',
+      password: 'dfab7c358bb163',
+      database: 'nanopips_stock'
     });
 
     this.connection.connect();
@@ -18,13 +18,49 @@ class Mysql {
       let query = this.connection.query(sqlQuery, post, (error, results, fields) => {
         if (error) throw error;
         resolve(results);
+
       });
       query.sql;
+
     })
+  }
+
+  async postCurrentTradePrice(data, btcPrice) {
+    //console.log(data);
+    //console.log(data);
+    let post = {
+      open: data.open,
+      high: data.high,
+      low: data.low,
+      close: data.close,
+      btc_price: btcPrice,
+      volume: data.volume,
+      timestamp: data.date,
+    };
+
+
+
+    let coinTable = data.coin + "_table";
+    let sql = "INSERT INTO  btc_eth_table SET ?";
+
+    let result = await this.executeQuery(sql, post);
+
+    // add unix to post
+   post['unix'] = data.unix;
+
+    // write json file for front end
+    /*
+     * Note: change this live socket in the front end
+     */
+    fs.writeFile('/home/nanopips/public_html/webtrader.nanopips.com/coin_live_price/trade.json', JSON.stringify(post), function (err) {
+      // console.log(err);
+    })
+    //console.log(result);
   }
 
 
   async postCurrentPrice(data) {
+    console.log(data);
     //console.log(data);
     let post = {
       dollar_price: data.dollarPrice,
@@ -32,14 +68,20 @@ class Mysql {
       timestamp: data.timestamp,
       coin: data.coin
     };
-    let sql = "INSERT INTO " + data.coin + "_table SET ?";
+
+
+
+    let coinTable = data.coin + "_table";
+    let sql = "INSERT INTO " + coinTable.toLowerCase() + " SET ?";
+
     let result = await this.executeQuery(sql, post);
 
     // write json file for front end
     /*
      * Note: change this live socket in the front end
      */
-    fs.writeFile('coin_live_price/' + data.coin + '.json', JSON.stringify(data), function (err) {
+    fs.writeFile('/home/nanopips/public_html/webtrader.nanopips.com/coin_live_price/' + data.coin + '.json', JSON.stringify(data), function (err) {
+
     })
     //console.log(result);
   }
