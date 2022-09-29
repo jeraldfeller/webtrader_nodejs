@@ -12,7 +12,7 @@
   "dependencies": {
     "ajax-request": "^1.2.3",
     "config": "^2.0.1",
-    "d3": "^5.9.2",
+    "d3": "^7.6.1",
     "express": "^4.16.4",
     "file-system": "^2.2.2",
     "fs": "0.0.1-security",
